@@ -7,16 +7,20 @@ import java.io.*;
 import org.springframework.amqp.AmqpException;
 import org.springframework.amqp.core.Message;
 import org.springframework.amqp.core.MessageListener;
-
+import edu.eci.arsw.exam.remote.ManejadorOfertasStub;
 public class OffertMessageListener implements MessageListener {
 
     Random rand = new Random(System.currentTimeMillis());
+    private ManejadorOfertasStub manejadorOfertas;
 
     public OffertMessageListener() {
         super();
         System.out.println("Comprador #"+IdentityGenerator.actualIdentity+" esperando eventos...");
     }
 
+    public void setManejadorOfertas(ManejadorOfertasStub manejadorOfertas){
+        this.manejadorOfertas = manejadorOfertas;
+    }
     @Override
     public void onMessage(Message message) {
         try {
@@ -25,7 +29,10 @@ public class OffertMessageListener implements MessageListener {
             
             int montoOferta = Math.abs(rand.nextInt(99999999));
 
-            //realizar oferta con el monto aleatorio generado
+            manejadorOfertas.agregarOferta(
+                IdentityGenerator.actualIdentity,
+                receivedProduct.getCode(),
+                montoOferta);
             
         } catch (Exception e) {
             throw new RuntimeException("An exception occured while trying to get a AMQP object:" + e.getMessage(), e);

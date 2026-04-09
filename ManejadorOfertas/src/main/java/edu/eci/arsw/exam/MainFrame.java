@@ -55,6 +55,7 @@ public class MainFrame extends javax.swing.JFrame {
         descripcionTareaTF = new javax.swing.JTextArea();
         botonEnvio = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
+        jScrollPane2.setViewportView(ofertasAceptadasTA);
         jLabel2 = new javax.swing.JLabel();
         codigoTareaTF = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
@@ -168,7 +169,14 @@ public class MainFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_codigoTareaTFActionPerformed
 
-
+    // Método para mostrar la oferta ganadora
+    public void mostrarOfertaGanadora(String codProducto, String ganador, int monto) {
+    ofertasAceptadasTA.append(
+        "Producto: " + codProducto + 
+        " | Ganador: " + ganador + 
+        " | Monto: $" + monto + "\n"
+    );
+}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonEnvio;
@@ -182,4 +190,5 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextField startPriceField;
     // End of variables declaration//GEN-END:variables
+    private javax.swing.JTextArea ofertasAceptadasTA = new javax.swing.JTextArea();
 }
